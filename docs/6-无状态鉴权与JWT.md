@@ -193,7 +193,9 @@ public boolean insert(UserEntity entity);
 
 ## 实现 `JWTUtil`
 
-在目录 `src/main/java/red/don/api/android/util` 下创建类 [`JWTUtil`](https://github.com/DevinDon/android-api-server/blob/c273b8eb841c1d4fde10783f5c23d931bb0e4ba4/src/main/java/red/don/api/android/util/JWTUtil.java) :point_left: ，实现编码解码功能：
+在目录 `src/main/java/red/don/api/android/util` 下创建类 [`JWTUtil`](https://github.com/DevinDon/android-api-server/blob/0e7a88efe6b93dd52064ff653296e9c4bc4f4cde/src/main/java/red/don/api/android/util/JWTUtil.java) :point_left: ，实现编码解码功能：
+
+**:wrench: 修复：parse(String), generate(UserEntity)** ，[点击查看](https://github.com/DevinDon/android-api-server/commit/0e7a88efe6b93dd52064ff653296e9c4bc4f4cde) 。
 
 ```java
 package red.don.api.android.util;
@@ -220,7 +222,7 @@ public class JWTUtil {
   public static UserEntity parse(String token) {
     try {
       Map<String, Object> body = Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody();
-      return new UserEntity((String) body.get("email"), (String) body.get("name"), null);
+      return new UserEntity((String) body.get("email"), (String) body.get("name"), null, (long) body.get("token"));
     } catch (Exception exp) {
       return null;
     }
@@ -236,6 +238,7 @@ public class JWTUtil {
     Map<String, Object> claims = new HashMap<>();
     claims.put("email", user.getEmail());
     claims.put("name", user.getName());
+    claims.put("token", user.getToken());
     return Jwts.builder().setClaims(claims).signWith(key).compact();
   }
 
@@ -250,7 +253,9 @@ public class JWTUtil {
 
 ## 重构 `SignService`
 
-打开 [`SignService`](https://github.com/DevinDon/android-api-server/blob/c273b8eb841c1d4fde10783f5c23d931bb0e4ba4/src/main/java/red/don/api/android/service/SignService.java) :point_left: ，重构 `signIn` 方法：
+打开 [`SignService`](https://github.com/DevinDon/android-api-server/blob/a2aa8bbcc71e023fc83509036d31365b2a9c62f3/src/main/java/red/don/api/android/service/SignService.java) :point_left: ，重构 `signIn` 方法：
+
+**:wrench: 修复：fix: signIn(UserEntity)** ，[点击查看](https://github.com/DevinDon/android-api-server/commit/a2aa8bbcc71e023fc83509036d31365b2a9c62f3) 。
 
 ```java
 /**
@@ -260,14 +265,13 @@ public class JWTUtil {
    * @return JWT token or null.
    */
 public String signIn(UserEntity user) {
-  UserEntity result = mapper
-    .selectOneWhere("`email` = '" + user.getEmail() + "' AND `password` = '" + user.getPassword() + "'");
-  if (result == null) {
+  user = mapper.selectOneWhere("`email` = '" + user.getEmail() + "' AND `password` = '" + user.getPassword() + "'");
+  if (user == null) {
     return null;
   } else {
-    result.setToken(System.currentTimeMillis());
-    mapper.update("email", result.getEmail(), result);
-    return JWTUtil.generate(result);
+    user.setToken(System.currentTimeMillis());
+    mapper.update("email", user.getEmail(), user);
+    return JWTUtil.generate(user);
   }
 }
 ```
