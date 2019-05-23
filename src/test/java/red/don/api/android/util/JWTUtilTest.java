@@ -18,7 +18,7 @@ public class JWTUtilTest {
 
   @Test
   public void all() {
-    UserEntity user = new UserEntity("email@email.com", "username", null);
+    UserEntity user = new UserEntity("email@email.com", "username", null, System.currentTimeMillis());
     String token = JWTUtil.generate(user);
     UserEntity parse = JWTUtil.parse(token);
     assertNotNull("generate(UserEntity) should return & not null", token);
