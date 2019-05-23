@@ -22,7 +22,7 @@ public class JWTUtil {
   public static UserEntity parse(String token) {
     try {
       Map<String, Object> body = Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody();
-      return new UserEntity((String) body.get("email"), (String) body.get("name"), null);
+      return new UserEntity((String) body.get("email"), (String) body.get("name"), null, (long) body.get("token"));
     } catch (Exception exp) {
       return null;
     }
@@ -38,7 +38,7 @@ public class JWTUtil {
     Map<String, Object> claims = new HashMap<>();
     claims.put("email", user.getEmail());
     claims.put("name", user.getName());
-    claims.put("token", System.currentTimeMillis());
+    claims.put("token", user.getToken());
     return Jwts.builder().setClaims(claims).signWith(key).compact();
   }
 
