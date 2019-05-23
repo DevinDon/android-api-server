@@ -20,14 +20,13 @@ public class SignService {
    * @return JWT token or null.
    */
   public String signIn(UserEntity user) {
-    UserEntity result = mapper
-        .selectOneWhere("`email` = '" + user.getEmail() + "' AND `password` = '" + user.getPassword() + "'");
-    if (result == null) {
+    user = mapper.selectOneWhere("`email` = '" + user.getEmail() + "' AND `password` = '" + user.getPassword() + "'");
+    if (user == null) {
       return null;
     } else {
-      result.setToken(System.currentTimeMillis());
-      mapper.update("email", result.getEmail(), result);
-      return JWTUtil.generate(result);
+      user.setToken(System.currentTimeMillis());
+      mapper.update("email", user.getEmail(), user);
+      return JWTUtil.generate(user);
     }
   }
 
