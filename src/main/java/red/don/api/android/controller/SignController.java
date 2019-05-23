@@ -20,13 +20,14 @@ public class SignController {
   // TODO: Refactor by AOP
   @PostMapping("/in")
   public Response<String> signIn(@RequestBody UserEntity user) {
-    return new Response<>(service.signIn(user));
+    String token = service.signIn(user);
+    return new Response<>(token != null, "", token);
   }
 
   // TODO: Refactor by AOP
   @PostMapping("/out")
   public Response<String> signOut(@RequestBody UserEntity user) {
-    return new Response<>(true);
+    return new Response<>(service.signOut(user));
   }
 
   // TODO: Refactor by AOP
