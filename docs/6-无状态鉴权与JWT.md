@@ -195,7 +195,7 @@ public boolean insert(UserEntity entity);
 
 在目录 `src/main/java/red/don/api/android/util` 下创建类 [`JWTUtil`](https://github.com/DevinDon/android-api-server/blob/0e7a88efe6b93dd52064ff653296e9c4bc4f4cde/src/main/java/red/don/api/android/util/JWTUtil.java) :point_left: ，实现编码解码功能：
 
-**:wrench: 修复：parse(String), generate(UserEntity)** ，[点击查看](https://github.com/DevinDon/android-api-server/commit/0e7a88efe6b93dd52064ff653296e9c4bc4f4cde) 。
+**:wrench: 修复：parse(String), generate(UserEntity)** ，[点击查看](https://github.com/DevinDon/android-api-server/commit/0e7a88efe6b93dd52064ff653296e9c4bc4f4cde) :point_left: ​。
 
 ```java
 package red.don.api.android.util;
@@ -255,7 +255,7 @@ public class JWTUtil {
 
 打开 [`SignService`](https://github.com/DevinDon/android-api-server/blob/a2aa8bbcc71e023fc83509036d31365b2a9c62f3/src/main/java/red/don/api/android/service/SignService.java) :point_left: ，重构 `signIn` 方法：
 
-**:wrench: 修复：fix: signIn(UserEntity)** ，[点击查看](https://github.com/DevinDon/android-api-server/commit/a2aa8bbcc71e023fc83509036d31365b2a9c62f3) 。
+**:wrench: 修复：fix: signIn(UserEntity)** ，[点击查看](https://github.com/DevinDon/android-api-server/commit/a2aa8bbcc71e023fc83509036d31365b2a9c62f3) :point_left: 。
 
 ```java
 /**
@@ -583,37 +583,19 @@ public class UserMapperTest {
 
 ## 测试 `JWTUtil`
 
-在测试目录 `src/test/java/red/don/api/android/util` 下新建类 [`JWTUtilTest`](https://github.com/DevinDon/android-api-server/blob/c273b8eb841c1d4fde10783f5c23d931bb0e4ba4/src/test/java/red/don/api/android/util/JWTUtilTest.java) :point_left: ：
+在测试目录 `src/test/java/red/don/api/android/util` 下新建类 [`JWTUtilTest`](https://github.com/DevinDon/android-api-server/blob/6b0cb1e22c3cc3b025d786652fed018348a295de/src/test/java/red/don/api/android/util/JWTUtilTest.java) :point_left: ，并测试所有方法：
+
+**:wrench: 修复：all()** ，[点击查看](https://github.com/DevinDon/android-api-server/commit/6b0cb1e22c3cc3b025d786652fed018348a295de) :point_left: 。
 
 ```java
-package red.don.api.android.util;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-
-import red.don.api.android.entity.UserEntity;
-import red.don.api.android.util.JWTUtil;
-
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class JWTUtilTest {
-
-  @Test
-  public void all() {
-    UserEntity user = new UserEntity("email@email.com", "username", null);
-    String token = JWTUtil.generate(user);
-    UserEntity parse = JWTUtil.parse(token);
-    assertNotNull("generate(UserEntity) should return & not null", token);
-    assertEquals("parse(String) should return & equal to user", user, parse);
-    assertNull("parse(String) should return null because token is invalid", JWTUtil.parse("a invalid jwt token"));
-  }
-
+@Test
+public void all() {
+  UserEntity user = new UserEntity("email@email.com", "username", null, System.currentTimeMillis());
+  String token = JWTUtil.generate(user);
+  UserEntity parse = JWTUtil.parse(token);
+  assertNotNull("generate(UserEntity) should return & not null", token);
+  assertEquals("parse(String) should return & equal to user", user, parse);
+  assertNull("parse(String) should return null because token is invalid", JWTUtil.parse("a invalid jwt token"));
 }
 ```
 
