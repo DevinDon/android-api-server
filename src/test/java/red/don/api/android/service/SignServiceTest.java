@@ -2,6 +2,8 @@ package red.don.api.android.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
@@ -46,17 +48,18 @@ public class SignServiceTest {
 
   @Test
   public void signIn() {
-    assertTrue("signIn(UserEntity) should return true because user is exist", service.signIn(user));
-    assertFalse("signIn(UserEntity) should return false because email is wrong",
+    assertNotNull("signIn(UserEntity) should return token because user is exist", service.signIn(user));
+    assertNull("signIn(UserEntity) should return null because email is wrong",
         service.signIn(new UserEntity("wrong email", "password")));
-    assertFalse("signIn(UserEntity) should return false because password is wrong",
+    assertNull("signIn(UserEntity) should return null because password is wrong",
         service.signIn(new UserEntity("email", "wrong password")));
-    assertFalse("signIn(UserEntity) should return false because nobody is not exist", service.signIn(nobody));
+    assertNull("signIn(UserEntity) should return null because nobody is not exist", service.signIn(nobody));
   }
 
   @Test
   public void signOut() {
-    assertFalse("signOut(..) should return false because no reason", service.signOut(user));
+    assertTrue("signOut(UserEntity) should return true", service.signOut(user));
+    assertFalse("signOut(UserEntity) should return false because user not exist", service.signOut(nobody));
   }
 
   @Test
