@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Android API Server</title>
+  <style>
+    html {
+      padding: 0;
+      margin: 0;
+
+      min-height: 100vh;
+      font-family: sans-serif;
+    }
+
+    body {
+      padding: 0;
+      margin: 0;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+
+      min-height: inherit;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Android API Server</h1>
+  <p>本站今天已被访问了 <span th:text="${total}"></span> 次</p>
+  <p>现在是格林尼治时间 <span id="time">00:00:00</span></p>
+</body>
+
+<script>
+  const time = document.getElementById('time');
+  time.innerText = new Date().toTimeString().slice(0, 8);
+  setInterval(() => time.innerText = new Date().toTimeString().slice(0, 8), 1000);
+</script>
+
+</html>
