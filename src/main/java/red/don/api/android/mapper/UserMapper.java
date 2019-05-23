@@ -37,7 +37,7 @@ public interface UserMapper extends Mapper<UserEntity> {
   public void deleteAll();
 
   @Override
-  @Insert("INSERT INTO `user`(`email`, `name`, `password`) VALUES (#{email}, #{name}, #{password})")
+  @Insert("INSERT INTO `user`(`email`, `name`, `password`, `token`) VALUES (#{email}, #{name}, #{password}, ${token})")
   public boolean insert(UserEntity entity);
 
   @Override
@@ -61,11 +61,11 @@ public interface UserMapper extends Mapper<UserEntity> {
   public UserEntity selectOne(@Param("field") String field, @Param("value") Object value);
 
   @Override
-  @Update("UPDATE `user` SET `email` = #{entity.email}, `name` = #{entity.name}, `password` = #{entity.password} WHERE `${field}` = #{value}")
+  @Update("UPDATE `user` SET `email` = #{entity.email}, `name` = #{entity.name}, `password` = #{entity.password}, `token` = ${entity.token} WHERE `${field}` = #{value}")
   public boolean update(@Param("field") String field, @Param("value") Object value, UserEntity entity);
 
   @Override
-  @Update("UPDATE `user` SET `email` = #{entity.email}, `name` = #{entity.name}, `password` = #{entity.password} WHERE ${where}")
+  @Update("UPDATE `user` SET `email` = #{entity.email}, `name` = #{entity.name}, `password` = #{entity.password}, `token` = ${entity.token} WHERE ${where}")
   public boolean updateWhere(@Param("where") String where, UserEntity entity);
 
 }
