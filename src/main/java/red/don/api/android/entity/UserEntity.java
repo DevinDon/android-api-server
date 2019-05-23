@@ -11,10 +11,12 @@ public class UserEntity implements Entity {
   private String name;
   /** User password, char(64). */
   private String password;
+  /** Last sign in time, millsecond. */
+  private long token;
 
   /** Empty user. */
   public UserEntity() {
-    this(null, null, null);
+    this(null, null);
   }
 
   /**
@@ -35,9 +37,22 @@ public class UserEntity implements Entity {
    * @param password Password.
    */
   public UserEntity(String email, String name, String password) {
+    this(email, name, password, 0);
+  }
+
+  /**
+   * New user with email, name, password & token.
+   *
+   * @param email    Email.
+   * @param name     Name.
+   * @param password Password.
+   * @param token    Token.
+   */
+  public UserEntity(String email, String name, String password, long token) {
     this.email = email;
     this.name = name;
     this.password = password;
+    this.token = token;
   }
 
   public String getEmail() {
@@ -64,6 +79,14 @@ public class UserEntity implements Entity {
     this.password = password;
   }
 
+  public long getToken() {
+    return token;
+  }
+
+  public void setToken(long token) {
+    this.token = token;
+  }
+
   @Override
   public int hashCode() {
     final int prime = 31;
@@ -71,6 +94,7 @@ public class UserEntity implements Entity {
     result = prime * result + ((email == null) ? 0 : email.hashCode());
     result = prime * result + ((name == null) ? 0 : name.hashCode());
     result = prime * result + ((password == null) ? 0 : password.hashCode());
+    result = prime * result + (int) (token ^ (token >>> 32));
     return result;
   }
 
@@ -98,12 +122,14 @@ public class UserEntity implements Entity {
         return false;
     } else if (!password.equals(other.password))
       return false;
+    if (token != other.token)
+      return false;
     return true;
   }
 
   @Override
   public String toString() {
-    return "UserEntity [email=" + email + ", name=" + name + ", password=" + password + "]";
+    return "UserEntity [email=" + email + ", name=" + name + ", password=" + password + ", token=" + token + "]";
   }
 
 }
