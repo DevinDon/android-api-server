@@ -1,5 +1,7 @@
 # Spring Boot 入门实战（六）：无状态鉴权与 JWT
 
+# 项目信息
+
 项目代码已托管至 [GitHub, https://github.com/DevinDon/android-api-server](https://github.com/DevinDon/android-api-server) ，[点击此处](https://github.com/DevinDon/android-api-server/tree/c273b8eb841c1d4fde10783f5c23d931bb0e4ba4) :point_left: 查看本章节内容。
 
 众所周知，我们在网络通信中常用的 HTTP 协议是一种无状态协议。但在实际的开发中，我们常常需要一些状态来标识，比如用户的登陆状态。为了通过 HTTP 协议实现状态标识，古老而又伟大的程序员们提出了诸如 `cookie - session` 、`token` 、`outh` 等解决方案。
@@ -728,3 +730,5 @@ public void signOut() {
 # 本章小节
 
 本章我们了解了 `JWT` 的定义、用途，以及 `JJWT` 在 Spring Boot 中的应用。在接下来的章节中，我们将会使用 `AOP` 切面编程思想，结合 `JWT` 实现服务器的用户鉴权功能。
+
+点击此处进入[《第七章：无状态鉴权与 AOP》](7-无状态鉴权与AOP.md#项目信息)

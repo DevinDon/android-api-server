@@ -1,5 +1,7 @@
 # Spring Boot 入门实战（七）：无状态鉴权与 AOP
 
+# 项目信息
+
 项目代码已托管至 [GitHub, https://github.com/DevinDon/android-api-server](https://github.com/DevinDon/android-api-server) ，[点击此处](https://github.com/DevinDon/android-api-server/tree/c5f0e56f4183f233f747fae932b7cd5e8f6237e0) :point_left: 查看本章节内容。
 
 在上一章中我们讲到了 `JWT` 的生成与解析，并实现了工具类 `JWTUtil` 。在本章中，我们将使用 `AOP` 切面编程来实现 `JWT` 身份鉴权，并将解析信息注入控制层 `Controller` ，实现代码解耦。
@@ -1234,3 +1236,5 @@ public void userView() throws Exception {
 本章我们深入了解了 `AOP` 设计理念在 Spring Boot 框架中的应用，并用其重构了控制层的鉴权部分。至此，本系列教程的开发部分已经全部完成。
 
 在最后一章，我们将会简单了解 Spring Boot 打包与 Docker 容器部署的相关知识。此部分并非课本内容，需要一定的 Linux 运维基础，有兴趣的同学简单翻阅即可。
+
+点击此处进入[《第八章：服务打包与部署》](8-服务打包与部署.md#项目信息)
