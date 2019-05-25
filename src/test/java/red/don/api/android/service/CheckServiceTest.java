@@ -82,7 +82,7 @@ public class CheckServiceTest {
     assertFalse("view(UserEntity, int, int, int) should return false because there is no check record",
         service.view(user, year, month, day));
     assertTrue("check(UserEntity) should return true", service.check(user)); // check in user
-    assertTrue("view(UserEntity, Calendar) should return true", service.view(user, calendar));
+    assertTrue("view(UserEntity, Calendar) should return true", service.view(user, CalendarUtil.now()));
     assertTrue("view(UserEntity, long) should return true", service.view(user, millisecond));
     assertTrue("view(UserEntity, int, int, int) should return true", service.view(user, year, month, day));
   }
