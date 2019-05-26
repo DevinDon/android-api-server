@@ -1,0 +1,50 @@
+version: '3.7'
+
+services:
+  android-api-server:
+    image: android-api-server
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 5
+        window: 10s
+      resources:
+        limits:
+          cpus: '0.40'
+          memory: 800M
+    networks:
+      - overnet
+  android-api-mysql:
+    image: mysql
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 5
+        window: 10s
+      resources:
+        limits:
+          cpus: '0.40'
+          memory: 800M
+    environment:
+      MYSQL_ROOT_PASSWORD: android
+      MYSQL_DATABASE: android
+      MYSQL_USER: android
+      MYSQL_PASSWORD: android
+    networks:
+      - overnet
+    volumes:
+      - "data-android-api-mysql:/usr/local/mysql/data"
+
+networks:
+  overnet:
+    external: true
+    name: overnet
+
+volumes:
+  data-android-api-mysql:
