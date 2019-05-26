@@ -28,6 +28,8 @@ public class LogAspect {
     var request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
     logger.info(
         "METHOD: " + request.getMethod() + ", URI: " + request.getRequestURI() + " REMOTE: " + request.getRemoteAddr());
+    logger.info("X-Real-IP: " + request.getHeader("X-Real-IP"));
+    logger.info("X-Forwarded-For: " + request.getHeader("X-Forwarded-For"));
   }
 
 }
