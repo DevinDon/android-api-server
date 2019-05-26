@@ -38,6 +38,8 @@ services:
       MYSQL_PASSWORD: android
     networks:
       - overnet
+    ports:
+      - "13306:3306"
     volumes:
       - "data-android-api-mysql:/usr/local/mysql/data"
 
