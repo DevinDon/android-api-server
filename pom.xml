@@ -9,7 +9,7 @@
   </parent>
   <groupId>red.don.api</groupId>
   <artifactId>android</artifactId>
-  <version>0.1.0</version>
+  <version>1.0.0</version>
   <name>android-api-server</name>
   <description>API server of android.</description>
   <properties>
