@@ -41,7 +41,7 @@ services:
     ports:
       - "13306:3306"
     volumes:
-      - "data-android-api-mysql:/usr/local/mysql/data"
+      - "data-android-api-mysql:/var/lib/mysql"
 
 networks:
   overnet:
