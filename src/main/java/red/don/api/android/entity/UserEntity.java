@@ -11,7 +11,7 @@ public class UserEntity implements Entity {
   private String name;
   /** User password, char(64). */
   private String password;
-  /** Last sign in time, millsecond. */
+  /** Last sign in millsecond time, bigint, default 0. */
   private long token;
 
   /** Empty user. */

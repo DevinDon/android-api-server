@@ -4,11 +4,11 @@ public class CheckEntity implements Entity {
 
   private static final long serialVersionUID = 1L;
 
-  /** User ID, int, primary key. */
+  /** User ID, bigint, primary key. */
   private long id;
-  /** User email, char(64), foreign key with `user`.`email`. */
+  /** User primary key email, char(64), foreign key with `user`.`email`. */
   private String user;
-  /** Check in date. */
+  /** Check in date, bigint. */
   private long date;
 
   /** New empty check entity. */

@@ -26,13 +26,31 @@
 
       min-height: inherit;
     }
+
+    header,
+    #content,
+    footer {
+      display: inherit;
+      flex-direction: inherit;
+      justify-content: inherit;
+      align-items: inherit;
+    }
   </style>
 </head>
 
 <body>
-  <h1>Android API Server</h1>
-  <p>本站今天已被访问了 <span th:text="${total}"></span> 次</p>
-  <p>现在是格林尼治时间 <span id="time">00:00:00</span></p>
+  <header>
+    <h1>Android API Server</h1>
+  </header>
+  <section id="content">
+    <p>API 接口格式请点击<a
+        href="https://devindon.github.io/android-api-server/#/%E9%99%84%E5%BD%95-API%E6%8E%A5%E5%8F%A3">传送门</a></p>
+    <p>本服务器的搭建笔记及教程请点击<a href="https://devindon.github.io/android-api-server/">传送门</a></p>
+  </section>
+  <footer>
+    <p>本站今天已被访问了 <span th:text="${total}"></span> 次</p>
+    <p>现在时间 <span id="time">00:00:00</span></p>
+  </footer>
 </body>
 
 <script>
