@@ -55,8 +55,8 @@ public class LogAspect {
     LogEntity log = new LogEntity(request.getMethod(), request.getRequestURI(), user == null ? null : user.getEmail(),
         request.getRemoteAddr(), System.currentTimeMillis());
     logger.info(log.toString());
-    service.access();
     mapper.insert(log);
+    service.access();
   }
 
 }

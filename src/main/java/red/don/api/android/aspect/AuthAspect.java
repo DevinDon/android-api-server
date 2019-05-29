@@ -39,8 +39,9 @@ public class AuthAspect {
         .getResponse();
     UserEntity auth = null;
     UserEntity user = null;
-    if (request.getHeader("Authorization") != null) {
-      auth = JWTUtil.parse(request.getHeader("Authorization").substring(7));
+    auth = request.getHeader("Authorization") == null ? null
+        : JWTUtil.parse(request.getHeader("Authorization").substring(7));
+    if (auth != null) {
       user = mapper.selectOne("email", auth.getEmail());
     }
     if (user == null || user.getToken() == 0 || user.getToken() > auth.getToken()) {
